@@ -83,7 +83,7 @@ function print_stats(duration)
     end
 
     add_header(stats)
-    add_version(stats)
+	add_version(stats)
     --add_file(stats)
     add_video(stats)
     add_audio(stats)
@@ -129,7 +129,7 @@ function add_video(s)
         return
     end
 
-    -- VIDEO CODEC AND HWDEC
+	-- VIDEO CODEC AND HWDEC
     if append_property(s, sec, "video-codec", {prefix="Video:", nl="", indent=""}) then
         if not append_property(s, sec, "hwdec-current",
                         {prefix="(hwdec:", nl="", indent=" ",
@@ -142,14 +142,14 @@ function add_video(s)
         end
     end
 	
-    -- show interop to check if Dx9 or Dx11
-    append_property(s, sec, "hwdec-interop", {prefix="Interop:"})
+	-- show interop to check if Dx9 or Dx11
+	append_property(s, sec, "hwdec-interop", {prefix="Interop:"})
 	
-    -- CURRENT VO
-    append_property(s, sec, "current-vo", {prefix="VO:"})
+	-- CURRENT VO
+	append_property(s, sec, "current-vo", {prefix="VO:"})
     
     -- VIDEO FPS
-    if append_property(s, sec, "fps", {prefix="FPS:", suffix=" (specified)"}) then
+	if append_property(s, sec, "fps", {prefix="FPS:", suffix=" (specified)"}) then
         append_property(s, sec, "estimated-vf-fps",
                         {suffix=" (estimated)", nl="", indent=""})
     else
@@ -157,8 +157,8 @@ function add_video(s)
                         {prefix="FPS:", suffix=" (estimated)"})
     end
 	
-    -- DISPLAY FPS
-    if append_property(s, sec, "display-fps", {prefix="Display FPS:", suffix=" (specified)"}) then
+	-- DISPLAY FPS
+	if append_property(s, sec, "display-fps", {prefix="Display FPS:", suffix=" (specified)"}) then
         append_property(s, sec, "estimated-display-fps",
                         {suffix=" (estimated)", nl="", indent=""})
     else
@@ -166,24 +166,24 @@ function add_video(s)
                         {prefix="Display FPS:", suffix=" (estimated)"})
     end
 	
-    -- AUDIO - VIDEO SYNC
-    append_property(s, sec, "avsync", {prefix="A-V:"})
+	-- AUDIO - VIDEO SYNC
+	append_property(s, sec, "avsync", {prefix="A-V:"})
     if append_property(s, sec, "drop-frame-count", {prefix="Dropped:"}) then
         append_property(s, sec, "vo-drop-frame-count", {prefix="VO:", nl=""})
         append_property(s, sec, "mistimed-frame-count", {prefix="Mistimed:", nl=""})
         append_property(s, sec, "vo-delayed-frame-count", {prefix="Delayed:", nl=""})
     end
 	
-    -- RENDER TIME
-    if append_property(s, sec, "render-time-last", {prefix="Render time:"}) then
-        append_property(s, sec, "render-time-avg", {prefix="Avg:", nl=""})
-        append_property(s, sec, "render-time-peak", {prefix="Peak:", nl=""})
+	-- RENDER TIME
+    if append_property(s, sec, "vo-performance/render-last", {prefix="Render time:"}) then
+        append_property(s, sec, "vo-performance/render-avg", {prefix="Avg:", nl=""})
+        append_property(s, sec, "vo-performance/render-peak", {prefix="Peak:", nl=""})
     end
 	
-    -- PRESENT TIME
-    if append_property(s, sec, "present-time-last", {prefix="Present time:"}) then
-        append_property(s, sec, "present-time-avg", {prefix="Avg:", nl=""})
-        append_property(s, sec, "present-time-peak", {prefix="Peak:", nl=""})
+	-- PRESENT TIME
+	if append_property(s, sec, "vo-performance/present-last", {prefix="Present time:"}) then
+        append_property(s, sec, "vo-performance/present-avg", {prefix="Avg:", nl=""})
+        append_property(s, sec, "vo-performance/present-peak", {prefix="Peak:", nl=""})
     end
     
     --if append_property(s, sec, "video-speed-correction", {prefix="DS:"}) then
@@ -191,23 +191,20 @@ function add_video(s)
     --                    {prefix="/", nl="", indent=" ", prefix_sep=" ", no_prefix_markup=true})
     --end
 	
-    -- VIDEO NATIVE RESOLUTION
+	-- VIDEO NATIVE RESOLUTION
     if append_property(s, sec, "video-params/w", {prefix="Native Resolution:"}) then
         append_property(s, sec, "video-params/h",
                         {prefix="x", nl="", indent=" ", prefix_sep=" ", no_prefix_markup=true})
     end
 	
-    -- WINDOW SCALE
+	-- WINDOW SCALE
     append_property(s, sec, "window-scale", {prefix="Window Scale:"})
 	
-    -- VIDEO PROPERTIES
-    --append_property(s, sec, "video-params/aspect", {prefix="Aspect Ratio:"})
-    --append_property(s, sec, "video-params/pixelformat", {prefix="Pixel format:"})
-    append_property(s, sec, "video-params/colormatrix", {prefix="Colormatrix:"})
-    append_property(s, sec, "video-params/primaries", {prefix="Primaries:"})
-    append_property(s, sec, "video-params/gamma", {prefix="Gamma:"})
-    append_property(s, sec, "video-params/colorlevels", {prefix="Levels:"})
-    --append_property(s, sec, "packet-video-bitrate", {prefix="Bitrate:", suffix=" kbps"})
+	-- VIDEO OUTPUT PROPERTIES
+    append_property(s, sec, "video-out-params/colormatrix", {prefix="Colormatrix:"})
+    append_property(s, sec, "video-out-params/primaries", {prefix="Primaries:"})
+    append_property(s, sec, "video-out-params/gamma", {prefix="Gamma:"})
+    append_property(s, sec, "video-out-params/colorlevels", {prefix="Levels:"})
 end
 
 
@@ -219,7 +216,8 @@ function add_audio(s)
     end
 
     --append_property(s, sec, "audio-codec", {prefix="Audio:", nl="", indent=""})
-    append_property(s, sec, "audio-codec-name", {prefix="Audio:", nl="", indent=""})
+	append_property(s, sec, "audio-codec-name", {prefix="Audio:", nl="", indent=""})
+	append_property(s, sec, "current-ao", {prefix="AO:"})
     append_property(s, sec, "audio-params/samplerate", {prefix="Sample Rate:", suffix=" Hz"})
     append_property(s, sec, "audio-params/channel-count", {prefix="Channels:"})
     --append_property(s, sec, "packet-audio-bitrate", {prefix="Bitrate:", suffix=" kbps"})

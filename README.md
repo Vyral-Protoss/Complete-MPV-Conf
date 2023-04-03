@@ -1,2 +1,2 @@
 # Complete-MPV-Conf
-Tested on Linux Mint 19.3 with Nvidia GT 710 and a 1080p 60Hz monitor
+Tested on Linux Mint 20.3 with Nvidia GT 720 and a 1080p 60Hz monitor
